@@ -1,0 +1,47 @@
+{
+  "schema": "project-layout-policy-v1",
+  "root_markdown_allowlist": [
+    "AGENTS.md",
+    "README.md"
+  ],
+  "runtime_file_patterns": [
+    "*.log",
+    "*.dump",
+    "*.core",
+    "*.pyc",
+    "*.tmp",
+    "*.swp",
+    ".DS_Store"
+  ],
+  "runtime_directory_names": [
+    "__pycache__",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+    "coverage",
+    "htmlcov",
+    "node_modules",
+    "dist",
+    "build",
+    "target"
+  ],
+  "secret_file_names": [
+    ".env",
+    ".env.local",
+    ".env.production",
+    "credentials.json",
+    "secrets.json"
+  ],
+  "allowed_secret_templates": [
+    ".env.example",
+    ".env.sample"
+  ],
+  "document_roots": [
+    "docs"
+  ],
+  "ignored_directory_names": [
+    ".git",
+    ".hg",
+    ".svn"
+  ]
+}

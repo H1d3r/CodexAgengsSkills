@@ -1,0 +1,29 @@
+{
+  "schema": "agent-runtime-capabilities-v1",
+  "profiles": {
+    "gpt-6-astra": {
+      "verified_on": "2026-09-08",
+      "behavior": {
+        "instruction_conflict_audit": true,
+        "capability_detection_required": true,
+        "long_task_persistence": true,
+        "risk_proportionate_testing": true,
+        "mid_turn_guidance": true,
+        "parallel_work_requires_independence": true
+      },
+      "permissions": "runtime-defined"
+    },
+    "unknown": {
+      "verified_on": null,
+      "behavior": {
+        "instruction_conflict_audit": true,
+        "capability_detection_required": true,
+        "long_task_persistence": false,
+        "risk_proportionate_testing": true,
+        "mid_turn_guidance": false,
+        "parallel_work_requires_independence": true
+      },
+      "permissions": "conservative"
+    }
+  }
+}

@@ -1,0 +1,943 @@
+{
+  "schema": "agent-skill-routing-v3",
+  "strategy": {
+    "dedupe": "skill-level",
+    "ordering": [
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "sort": "level-then-explicit-priority-stable",
+    "conflict_resolution": "lower-priority-number-wins",
+    "note": "Collect direct, event, fact, dependency, and combination matches; resolve conflicts deterministically; then sort by level and explicit priority."
+  },
+  "normalize": {
+    "aliases": {
+      "js": "javascript",
+      "ts": "typescript",
+      "db": "sql",
+      "database": "sql",
+      "c#": "csharp",
+      ".net": "csharp",
+      "dotnet": "csharp",
+      "golang": "go",
+      "python3": "python",
+      "py": "python",
+      "ci": "devops",
+      "cd": "devops",
+      "ops": "devops"
+    }
+  },
+  "events": [
+    "file-create",
+    "directory-create",
+    "artifact-generate",
+    "project-scaffold",
+    "repository-audit"
+  ],
+  "skills": {
+    "python": {
+      "path": "agent-skills/python/SKILL.md",
+      "level": "P1",
+      "priority": 100,
+      "triggers": {
+        "keywords": [
+          "python"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "python"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "python-pro": {
+      "path": "agent-skills/python-pro/SKILL.md",
+      "level": "P1",
+      "priority": 110,
+      "triggers": {
+        "keywords": [
+          "python-pro",
+          "python3.12",
+          "python3.13",
+          "uv",
+          "ruff",
+          "pyright",
+          "mypy",
+          "asyncio",
+          "fastapi",
+          "pydantic"
+        ],
+        "phrases": [
+          "python 3.12",
+          "python 3.13",
+          "python async",
+          "python performance",
+          "python architecture"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "python"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "python-testing": {
+      "path": "agent-skills/python-testing/SKILL.md",
+      "level": "P1",
+      "priority": 120,
+      "triggers": {
+        "keywords": [
+          "python-testing",
+          "pytest",
+          "hypothesis"
+        ],
+        "phrases": [
+          "python fixtures",
+          "python mock",
+          "python mocking"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "python"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "python-testing-patterns": {
+      "path": "agent-skills/python-testing-patterns/SKILL.md",
+      "level": "P1",
+      "priority": 130,
+      "triggers": {
+        "keywords": [
+          "python-testing-patterns",
+          "pytest",
+          "hypothesis"
+        ],
+        "phrases": [
+          "python fixtures",
+          "python mock",
+          "python mocking"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "python-testing"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "go": {
+      "path": "agent-skills/go/SKILL.md",
+      "level": "P1",
+      "priority": 200,
+      "triggers": {
+        "keywords": [
+          "go"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "go"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "go-pro": {
+      "path": "agent-skills/go-pro/SKILL.md",
+      "level": "P1",
+      "priority": 210,
+      "triggers": {
+        "keywords": [
+          "go-pro",
+          "golang-pro"
+        ],
+        "phrases": [
+          "go production",
+          "golang production",
+          "go performance"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "go"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "go-concurrency": {
+      "path": "agent-skills/go-concurrency/SKILL.md",
+      "level": "P1",
+      "priority": 220,
+      "triggers": {
+        "keywords": [
+          "go-concurrency",
+          "goroutine",
+          "goroutines",
+          "errgroup"
+        ],
+        "phrases": [
+          "go concurrency",
+          "golang concurrency",
+          "go channel",
+          "go channels",
+          "golang channels"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "go"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "rust": {
+      "path": "agent-skills/rust/SKILL.md",
+      "level": "P1",
+      "priority": 300,
+      "triggers": {
+        "keywords": [
+          "rust"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "rust"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "rust-pro": {
+      "path": "agent-skills/rust-pro/SKILL.md",
+      "level": "P1",
+      "priority": 310,
+      "triggers": {
+        "keywords": [
+          "rust-pro",
+          "ownership",
+          "lifetimes",
+          "lifetime",
+          "borrow-checker"
+        ],
+        "phrases": [
+          "rust performance",
+          "rust ownership",
+          "rust unsafe",
+          "rust ffi"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "rust"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "rust-async": {
+      "path": "agent-skills/rust-async/SKILL.md",
+      "level": "P1",
+      "priority": 320,
+      "triggers": {
+        "keywords": [
+          "rust-async",
+          "tokio",
+          "async-trait"
+        ],
+        "phrases": [
+          "rust async",
+          "rust tokio",
+          "rust futures"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "rust"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "csharp": {
+      "path": "agent-skills/csharp/SKILL.md",
+      "level": "P1",
+      "priority": 400,
+      "triggers": {
+        "keywords": [
+          "csharp"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "dotnet"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "csharp-pro": {
+      "path": "agent-skills/csharp-pro/SKILL.md",
+      "level": "P1",
+      "priority": 410,
+      "triggers": {
+        "keywords": [
+          "csharp-pro",
+          "linq"
+        ],
+        "phrases": [
+          "modern csharp",
+          "modern c#",
+          "csharp performance"
+        ],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [
+        "csharp"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "dotnet-backend": {
+      "path": "agent-skills/dotnet-backend/SKILL.md",
+      "level": "P1",
+      "priority": 420,
+      "triggers": {
+        "keywords": [
+          "dotnet-backend",
+          "asp.net",
+          "aspnet",
+          "efcore",
+          "ef-core"
+        ],
+        "phrases": [
+          "dotnet api",
+          "csharp asp.net",
+          "c# asp.net"
+        ],
+        "events": [],
+        "project_facts": [
+          "dotnet-backend"
+        ]
+      },
+      "requires": [
+        "csharp",
+        "csharp-pro"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "javascript-typescript": {
+      "path": "agent-skills/javascript-typescript/SKILL.md",
+      "level": "P1",
+      "priority": 500,
+      "triggers": {
+        "keywords": [
+          "javascript",
+          "typescript"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "javascript-typescript"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "frontend-react": {
+      "path": "agent-skills/frontend-react/SKILL.md",
+      "level": "P1",
+      "priority": 600,
+      "triggers": {
+        "keywords": [
+          "react"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "react"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "java": {
+      "path": "agent-skills/java/SKILL.md",
+      "level": "P1",
+      "priority": 700,
+      "triggers": {
+        "keywords": [
+          "java"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "java"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "project-structure": {
+      "path": "agent-skills/project-structure/SKILL.md",
+      "level": "P2",
+      "priority": 900,
+      "triggers": {
+        "keywords": [
+          "project-structure",
+          "directory-structure",
+          "repository-hygiene",
+          "scaffold",
+          "scaffolding",
+          "monorepo",
+          "file-placement"
+        ],
+        "phrases": [
+          "project structure",
+          "directory structure",
+          "organize files",
+          "organise files",
+          "repository layout",
+          "create module",
+          "generate documentation",
+          "目录结构",
+          "项目结构",
+          "整理文件",
+          "创建模块",
+          "生成文档",
+          "重构目录"
+        ],
+        "events": [
+          "file-create",
+          "directory-create",
+          "artifact-generate",
+          "project-scaffold",
+          "repository-audit"
+        ],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "agent-runtime-compat": {
+      "path": "agent-skills/agent-runtime-compat/SKILL.md",
+      "level": "P2",
+      "priority": 910,
+      "triggers": {
+        "keywords": [
+          "codex",
+          "cursor",
+          "gpt-6-astra",
+          "agent-runtime"
+        ],
+        "phrases": [
+          "cursor rules",
+          "pi coding agent",
+          "pi agent",
+          "agent runtime",
+          "model compatibility",
+          "gpt 6 astra",
+          "gpt-6 astra",
+          "agent skills"
+        ],
+        "events": [],
+        "project_facts": [
+          "agent-runtime"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "frontend-framework": {
+      "path": "agent-skills/frontend-framework/SKILL.md",
+      "level": "P2",
+      "priority": 1000,
+      "triggers": {
+        "keywords": [
+          "frontend"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "frontend"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "mobile": {
+      "path": "agent-skills/mobile/SKILL.md",
+      "level": "P2",
+      "priority": 1010,
+      "triggers": {
+        "keywords": [
+          "mobile",
+          "android",
+          "ios"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "android",
+          "ios"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "backend": {
+      "path": "agent-skills/backend/SKILL.md",
+      "level": "P2",
+      "priority": 1020,
+      "triggers": {
+        "keywords": [
+          "backend"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "api-design": {
+      "path": "agent-skills/api-design/SKILL.md",
+      "level": "P2",
+      "priority": 1030,
+      "triggers": {
+        "keywords": [
+          "api"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "api-contract": {
+      "path": "agent-skills/api-contract/SKILL.md",
+      "level": "P2",
+      "priority": 1040,
+      "triggers": {
+        "keywords": [
+          "api"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "sql": {
+      "path": "agent-skills/sql/SKILL.md",
+      "level": "P2",
+      "priority": 1050,
+      "triggers": {
+        "keywords": [
+          "sql"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "sql"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "database-performance": {
+      "path": "agent-skills/database-performance/SKILL.md",
+      "level": "P2",
+      "priority": 1060,
+      "triggers": {
+        "keywords": [
+          "sql"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "sql"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "infra-devops": {
+      "path": "agent-skills/infra-devops/SKILL.md",
+      "level": "P2",
+      "priority": 1070,
+      "triggers": {
+        "keywords": [
+          "infra",
+          "devops"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "security": {
+      "path": "agent-skills/security/SKILL.md",
+      "level": "P2",
+      "priority": 1080,
+      "triggers": {
+        "keywords": [
+          "security",
+          "compliance"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "testing": {
+      "path": "agent-skills/testing/SKILL.md",
+      "level": "P3",
+      "priority": 2000,
+      "triggers": {
+        "keywords": [
+          "testing"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "task-template": {
+      "path": "agent-skills/task-template/SKILL.md",
+      "level": "P3",
+      "priority": 2010,
+      "triggers": {
+        "keywords": [
+          "testing",
+          "quality-gates"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "tdd": {
+      "path": "agent-skills/tdd/SKILL.md",
+      "level": "P3",
+      "priority": 2020,
+      "triggers": {
+        "keywords": [
+          "tdd"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "quality-gates": {
+      "path": "agent-skills/quality-gates/SKILL.md",
+      "level": "P3",
+      "priority": 2030,
+      "triggers": {
+        "keywords": [
+          "quality-gates"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "coding-standards": {
+      "path": "agent-skills/coding-standards/SKILL.md",
+      "level": "P3",
+      "priority": 2040,
+      "triggers": {
+        "keywords": [
+          "coding-standards",
+          "standards"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    }
+  },
+  "combinations": [
+    {
+      "when_keywords": [
+        "python",
+        "testing"
+      ],
+      "includes": [
+        "python-testing",
+        "python-testing-patterns"
+      ],
+      "note": "Python testing tasks include language-specific testing guidance before generic testing guidance."
+    }
+  ],
+  "minimal_collections": {
+    "python": [
+      "python"
+    ],
+    "python + pytest": [
+      "python",
+      "python-testing",
+      "python-testing-patterns"
+    ],
+    "go": [
+      "go"
+    ],
+    "go + concurrency": [
+      "go",
+      "go-concurrency"
+    ],
+    "rust": [
+      "rust"
+    ],
+    "rust + async": [
+      "rust",
+      "rust-async"
+    ],
+    "csharp": [
+      "csharp"
+    ],
+    "dotnet backend": [
+      "csharp",
+      "csharp-pro",
+      "dotnet-backend"
+    ],
+    "react": [
+      "frontend-react"
+    ],
+    "frontend": [
+      "frontend-framework"
+    ],
+    "api": [
+      "api-design",
+      "api-contract"
+    ],
+    "backend + api + security": [
+      "backend",
+      "api-design",
+      "api-contract",
+      "security"
+    ],
+    "sql": [
+      "sql",
+      "database-performance"
+    ],
+    "file create": [
+      "project-structure"
+    ],
+    "gpt-6-astra": [
+      "agent-runtime-compat"
+    ]
+  }
+}

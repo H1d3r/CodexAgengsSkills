@@ -1,0 +1,299 @@
+[
+  {
+    "name": "python-only",
+    "query": "I need a python script refactor",
+    "expected": [
+      "agent-skills/python/SKILL.md"
+    ]
+  },
+  {
+    "name": "python-version-phrase",
+    "query": "modern Python 3.12 service",
+    "expected": [
+      "agent-skills/python/SKILL.md",
+      "agent-skills/python-pro/SKILL.md"
+    ]
+  },
+  {
+    "name": "python-tooling-alias",
+    "query": "python uv and ruff setup",
+    "expected": [
+      "agent-skills/python/SKILL.md",
+      "agent-skills/python-pro/SKILL.md"
+    ]
+  },
+  {
+    "name": "python-async-phrase",
+    "query": "python async architecture review",
+    "expected": [
+      "agent-skills/python/SKILL.md",
+      "agent-skills/python-pro/SKILL.md"
+    ]
+  },
+  {
+    "name": "go-production-phrase",
+    "query": "go production service performance",
+    "expected": [
+      "agent-skills/go/SKILL.md",
+      "agent-skills/go-pro/SKILL.md"
+    ]
+  },
+  {
+    "name": "csharp-modern-phrase",
+    "query": "modern c# nullable async code",
+    "expected": [
+      "agent-skills/csharp/SKILL.md",
+      "agent-skills/csharp-pro/SKILL.md"
+    ]
+  },
+  {
+    "name": "python-testing-alias",
+    "query": "pytest fixtures and mocking",
+    "expected": [
+      "agent-skills/python/SKILL.md",
+      "agent-skills/python-testing/SKILL.md",
+      "agent-skills/python-testing-patterns/SKILL.md"
+    ]
+  },
+  {
+    "name": "python-scoped-testing-phrase",
+    "query": "python fixtures and mock boundaries",
+    "expected": [
+      "agent-skills/python/SKILL.md",
+      "agent-skills/python-testing/SKILL.md",
+      "agent-skills/python-testing-patterns/SKILL.md"
+    ]
+  },
+  {
+    "name": "go-scoped-channel-phrase",
+    "query": "go channel lifecycle and cancellation",
+    "expected": [
+      "agent-skills/go/SKILL.md",
+      "agent-skills/go-concurrency/SKILL.md"
+    ]
+  },
+  {
+    "name": "rust-scoped-futures-phrase",
+    "query": "rust futures cancellation",
+    "expected": [
+      "agent-skills/rust/SKILL.md",
+      "agent-skills/rust-async/SKILL.md"
+    ]
+  },
+  {
+    "name": "ambiguous-keyword-no-language",
+    "query": "review a channel and mock implementation",
+    "expected": []
+  },
+  {
+    "name": "go-alias-normalization",
+    "query": "golang service needs improvement",
+    "expected": [
+      "agent-skills/go/SKILL.md"
+    ]
+  },
+  {
+    "name": "go-concurrency-phrase",
+    "query": "Go concurrency with goroutines and channels",
+    "expected": [
+      "agent-skills/go/SKILL.md",
+      "agent-skills/go-concurrency/SKILL.md"
+    ]
+  },
+  {
+    "name": "frontend-react-combo",
+    "query": "frontend and react page",
+    "expected": [
+      "agent-skills/frontend-react/SKILL.md",
+      "agent-skills/frontend-framework/SKILL.md"
+    ]
+  },
+  {
+    "name": "backend-api-security-combo",
+    "query": "backend api security checklist",
+    "expected": [
+      "agent-skills/backend/SKILL.md",
+      "agent-skills/api-design/SKILL.md",
+      "agent-skills/api-contract/SKILL.md",
+      "agent-skills/security/SKILL.md"
+    ]
+  },
+  {
+    "name": "python-testing-combo",
+    "query": "python api testing",
+    "expected": [
+      "agent-skills/python/SKILL.md",
+      "agent-skills/python-testing/SKILL.md",
+      "agent-skills/python-testing-patterns/SKILL.md",
+      "agent-skills/api-design/SKILL.md",
+      "agent-skills/api-contract/SKILL.md",
+      "agent-skills/testing/SKILL.md",
+      "agent-skills/task-template/SKILL.md"
+    ]
+  },
+  {
+    "name": "quality-gates-priority",
+    "query": "quality-gates and testing",
+    "expected": [
+      "agent-skills/testing/SKILL.md",
+      "agent-skills/task-template/SKILL.md",
+      "agent-skills/quality-gates/SKILL.md"
+    ]
+  },
+  {
+    "name": "rust-async-alias",
+    "query": "rust tokio timeout handling",
+    "expected": [
+      "agent-skills/rust/SKILL.md",
+      "agent-skills/rust-async/SKILL.md"
+    ]
+  },
+  {
+    "name": "rust-ownership-alias",
+    "query": "rust ownership and lifetime review",
+    "expected": [
+      "agent-skills/rust/SKILL.md",
+      "agent-skills/rust-pro/SKILL.md"
+    ]
+  },
+  {
+    "name": "csharp-standards-alias",
+    "query": "c# code review and coding standards",
+    "expected": [
+      "agent-skills/csharp/SKILL.md",
+      "agent-skills/coding-standards/SKILL.md"
+    ]
+  },
+  {
+    "name": "dotnet-backend-phrase",
+    "query": "dotnet api with EF Core",
+    "expected": [
+      "agent-skills/csharp/SKILL.md",
+      "agent-skills/csharp-pro/SKILL.md",
+      "agent-skills/dotnet-backend/SKILL.md",
+      "agent-skills/api-design/SKILL.md",
+      "agent-skills/api-contract/SKILL.md"
+    ]
+  },
+  {
+    "name": "sql-keyword-normalize",
+    "query": "database migration for sql and performance",
+    "expected": [
+      "agent-skills/sql/SKILL.md",
+      "agent-skills/database-performance/SKILL.md"
+    ]
+  },
+  {
+    "name": "devops-alias",
+    "query": "ci and devops pipeline",
+    "expected": [
+      "agent-skills/infra-devops/SKILL.md"
+    ]
+  },
+  {
+    "name": "golang-testing",
+    "query": "golang and testing",
+    "expected": [
+      "agent-skills/go/SKILL.md",
+      "agent-skills/testing/SKILL.md",
+      "agent-skills/task-template/SKILL.md"
+    ]
+  },
+  {
+    "name": "duplicate-file-dedupe",
+    "query": "js javascript ts typescript frontend react",
+    "expected": [
+      "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/frontend-react/SKILL.md",
+      "agent-skills/frontend-framework/SKILL.md"
+    ]
+  },
+  {
+    "name": "unknown-text",
+    "query": "review a plain text document",
+    "expected": []
+  },
+  {
+    "name": "file-create-event",
+    "query": "add a helper",
+    "events": [
+      "file-create"
+    ],
+    "expected": [
+      "agent-skills/project-structure/SKILL.md"
+    ]
+  },
+  {
+    "name": "read-only-no-layout",
+    "query": "review plain text",
+    "expected": []
+  },
+  {
+    "name": "project-structure-phrase",
+    "query": "design the project structure",
+    "expected": [
+      "agent-skills/project-structure/SKILL.md"
+    ]
+  },
+  {
+    "name": "organize-files-phrase",
+    "query": "organize files before scaffolding",
+    "expected": [
+      "agent-skills/project-structure/SKILL.md"
+    ]
+  },
+  {
+    "name": "chinese-directory-phrase",
+    "query": "请整理文件并优化目录结构",
+    "expected": [
+      "agent-skills/project-structure/SKILL.md"
+    ]
+  },
+  {
+    "name": "pi-math-no-runtime",
+    "query": "calculate pi to ten digits",
+    "expected": []
+  },
+  {
+    "name": "pi-agent-runtime",
+    "query": "update rules for the pi coding agent",
+    "expected": [
+      "agent-skills/agent-runtime-compat/SKILL.md"
+    ]
+  },
+  {
+    "name": "cursor-rules-runtime",
+    "query": "audit cursor rules",
+    "expected": [
+      "agent-skills/agent-runtime-compat/SKILL.md"
+    ]
+  },
+  {
+    "name": "gpt-6-astra-runtime",
+    "query": "support gpt-6-astra",
+    "expected": [
+      "agent-skills/agent-runtime-compat/SKILL.md"
+    ]
+  },
+  {
+    "name": "python-project-fact",
+    "query": "review implementation",
+    "project_files": [
+      "pyproject.toml"
+    ],
+    "expected": [
+      "agent-skills/python/SKILL.md"
+    ]
+  },
+  {
+    "name": "go-event-order",
+    "query": "go add command",
+    "events": [
+      "file-create"
+    ],
+    "expected": [
+      "agent-skills/go/SKILL.md",
+      "agent-skills/project-structure/SKILL.md"
+    ]
+  }
+]
