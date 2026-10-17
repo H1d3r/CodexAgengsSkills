@@ -10,6 +10,8 @@ description: Structure multi-step engineering work with a single active item, fo
 - [ ] 明确目标（修复/重构/分析/新增）
 - [ ] 确认语言与主入口
 - [ ] 识别必须遵循的仓库级约束
+- [ ] 维护有序 TODO，同时仅一个事项进行中
+- [ ] 用户或项目明确委派且宿主支持时，优先把独立工作按 [subagent-workflow](../subagent-workflow/SKILL.md) 有界派单；立即 critical path 本地做，小任务、共享编辑或工具缺失顺序执行
 
 ## 变更执行
 
@@ -22,6 +24,7 @@ description: Structure multi-step engineering work with a single active item, fo
 - [ ] 运行对应语言/模块命令
 - [ ] 失败时给出根因与降级方案
 - [ ] 无法运行时给出替代手工验证方式
+- [ ] 有委派时回收 compact results，核对写集与实际 diff，再由父线程运行最小集成检查并关闭已完成 worker（宿主不支持时说明限制）
 
 ## 交付
 

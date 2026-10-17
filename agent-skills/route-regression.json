@@ -204,6 +204,7 @@
     "query": "js javascript ts typescript frontend react",
     "expected": [
       "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/typescript/SKILL.md",
       "agent-skills/frontend-react/SKILL.md",
       "agent-skills/frontend-framework/SKILL.md"
     ]
@@ -295,5 +296,263 @@
       "agent-skills/go/SKILL.md",
       "agent-skills/project-structure/SKILL.md"
     ]
+  },
+  {
+    "name": "cpp-alias",
+    "query": "modern C++ RAII",
+    "expected": [
+      "agent-skills/cpp/SKILL.md"
+    ]
+  },
+  {
+    "name": "cxx-alias",
+    "query": "CXX ownership",
+    "expected": [
+      "agent-skills/cpp/SKILL.md"
+    ]
+  },
+  {
+    "name": "cpp-not-c-or-caption",
+    "query": "C language photo caption",
+    "expected": []
+  },
+  {
+    "name": "typescript-not-design",
+    "query": "TypeScript parser",
+    "expected": [
+      "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/typescript/SKILL.md"
+    ]
+  },
+  {
+    "name": "javascript-no-ts-specialist",
+    "query": "JavaScript utility",
+    "expected": [
+      "agent-skills/javascript-typescript/SKILL.md"
+    ]
+  },
+  {
+    "name": "vue-version",
+    "query": "Vue 3 component",
+    "expected": [
+      "agent-skills/frontend-vue/SKILL.md",
+      "agent-skills/frontend-framework/SKILL.md"
+    ]
+  },
+  {
+    "name": "vue-chinese",
+    "query": "修复Vue组件",
+    "expected": [
+      "agent-skills/frontend-vue/SKILL.md",
+      "agent-skills/frontend-framework/SKILL.md"
+    ]
+  },
+  {
+    "name": "ui-design-phrase",
+    "query": "maintain design tokens",
+    "expected": [
+      "agent-skills/frontend-design/SKILL.md"
+    ]
+  },
+  {
+    "name": "ui-ordinary-no-design",
+    "query": "review user database schema",
+    "expected": [
+      "agent-skills/sql/SKILL.md",
+      "agent-skills/database-performance/SKILL.md"
+    ]
+  },
+  {
+    "name": "ui-event",
+    "query": "review screen",
+    "events": [
+      "ui-review"
+    ],
+    "expected": [
+      "agent-skills/frontend-design/SKILL.md"
+    ]
+  },
+  {
+    "name": "dispatch-event",
+    "query": "split independent implementation",
+    "events": [
+      "task-dispatch"
+    ],
+    "expected": [
+      "agent-skills/subagent-workflow/SKILL.md"
+    ]
+  },
+  {
+    "name": "chinese-subagents",
+    "query": "尽量用子代理完成独立任务",
+    "expected": [
+      "agent-skills/subagent-workflow/SKILL.md"
+    ]
+  },
+  {
+    "name": "ordinary-agent-no-dispatch",
+    "query": "agent updates task status",
+    "expected": []
+  },
+  {
+    "name": "target-cpp",
+    "query": "review implementation",
+    "files": [
+      "src/main.cpp"
+    ],
+    "expected": [
+      "agent-skills/cpp/SKILL.md"
+    ]
+  },
+  {
+    "name": "target-typescript",
+    "query": "review implementation",
+    "files": [
+      "src/parser.ts"
+    ],
+    "expected": [
+      "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/typescript/SKILL.md"
+    ]
+  },
+  {
+    "name": "target-vue",
+    "query": "review implementation",
+    "files": [
+      "src/App.vue"
+    ],
+    "expected": [
+      "agent-skills/frontend-vue/SKILL.md",
+      "agent-skills/frontend-framework/SKILL.md"
+    ]
+  },
+  {
+    "name": "target-tsx-framework-ambiguous",
+    "query": "review implementation",
+    "files": [
+      "src/App.tsx"
+    ],
+    "expected": [
+      "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/typescript/SKILL.md"
+    ]
+  },
+  {
+    "name": "target-python-not-vue-project",
+    "query": "review implementation",
+    "files": [
+      "tools/check.py"
+    ],
+    "project_files": [
+      "package.json"
+    ],
+    "project_contents": {
+      "package.json": "{\"dependencies\":{\"vue\":\"^3\",\"typescript\":\"^5\"}}"
+    },
+    "expected": [
+      "agent-skills/python/SKILL.md"
+    ]
+  },
+  {
+    "name": "vue-project-facts",
+    "query": "review implementation",
+    "project_files": [
+      "package.json"
+    ],
+    "project_contents": {
+      "package.json": "{\"dependencies\":{\"vue\":\"^3\"},\"devDependencies\":{\"typescript\":\"^5\"}}"
+    },
+    "expected": [
+      "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/typescript/SKILL.md",
+      "agent-skills/frontend-vue/SKILL.md",
+      "agent-skills/frontend-framework/SKILL.md"
+    ]
+  },
+  {
+    "name": "cmake-cpp-project",
+    "query": "review implementation",
+    "project_files": [
+      "CMakeLists.txt"
+    ],
+    "project_contents": {
+      "CMakeLists.txt": "project(app LANGUAGES CXX)\n"
+    },
+    "expected": [
+      "agent-skills/cpp/SKILL.md"
+    ]
+  },
+  {
+    "name": "cmake-c-only-no-cpp",
+    "query": "review implementation",
+    "project_files": [
+      "CMakeLists.txt"
+    ],
+    "project_contents": {
+      "CMakeLists.txt": "project(app LANGUAGES C)\n"
+    },
+    "expected": []
+  },
+  {
+    "name": "target-header-ambiguous",
+    "query": "review implementation",
+    "files": [
+      "include/common.h"
+    ],
+    "expected": []
+  },
+  {
+    "name": "target-explicit-cross-language",
+    "query": "review Python and TypeScript",
+    "files": [
+      "scripts/check.py"
+    ],
+    "expected": [
+      "agent-skills/python/SKILL.md",
+      "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/typescript/SKILL.md"
+    ]
+  },
+  {
+    "name": "ownership-without-rust-context",
+    "query": "object ownership and lifetime review",
+    "expected": []
+  },
+  {
+    "name": "uiux-slash-phrase",
+    "query": "UI/UX polish",
+    "expected": [
+      "agent-skills/frontend-design/SKILL.md"
+    ]
+  },
+  {
+    "name": "target-explicit-react",
+    "query": "review React component",
+    "files": [
+      "src/App.tsx"
+    ],
+    "expected": [
+      "agent-skills/javascript-typescript/SKILL.md",
+      "agent-skills/typescript/SKILL.md",
+      "agent-skills/frontend-react/SKILL.md"
+    ]
+  },
+  {
+    "name": "cpp-standard-spelling",
+    "query": "C++20 resource cleanup",
+    "expected": [
+      "agent-skills/cpp/SKILL.md"
+    ]
+  },
+  {
+    "name": "cmake-description-cxx-is-not-language",
+    "query": "review implementation",
+    "project_files": [
+      "CMakeLists.txt"
+    ],
+    "project_contents": {
+      "CMakeLists.txt": "project(app DESCRIPTION \"CXX tooling\" LANGUAGES C)"
+    },
+    "expected": []
   }
 ]

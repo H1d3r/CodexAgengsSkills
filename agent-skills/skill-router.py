@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import re
 import tempfile
@@ -56,6 +57,32 @@ def detect_project_facts(project_root: Path | None) -> list[str]:
         facts.add("rust")
     if exists("package.json") or exists("tsconfig.json") or exists("jsconfig.json"):
         facts.add("javascript-typescript")
+    if exists("tsconfig.json") or list(root.glob("tsconfig.*.json")):
+        facts.update(("javascript-typescript", "typescript"))
+    cmake = root / "CMakeLists.txt"
+    if cmake.is_file():
+        try:
+            cmake_text = re.sub(r"#\[(=*)\[.*?\]\1\]", "", cmake.read_text(encoding="utf-8"), flags=re.DOTALL)
+            cmake_text = re.sub(r"#[^\n]*", "", cmake_text)
+            # Ignore string payloads and bracket arguments: a description or
+            # project name containing CXX is not a language declaration.
+            cmake_text = re.sub(r'"(?:\\.|[^"\\])*"|\[(=*)\[.*?\]\1\]', '""', cmake_text, flags=re.DOTALL)
+            for command in re.finditer(r"\b(project|enable_language)\s*\(([^)]*)\)", cmake_text, re.IGNORECASE):
+                arguments = command[2].split()
+                if command[1].lower() == "project":
+                    # Explicit LANGUAGES only; unresolved variables and default
+                    # languages do not provide enough evidence for this router.
+                    if "LANGUAGES" not in arguments[1:]:
+                        continue
+                    arguments = arguments[arguments.index("LANGUAGES", 1) + 1:]
+                    for index, argument in enumerate(arguments):
+                        if argument in {"VERSION", "DESCRIPTION", "HOMEPAGE_URL"}:
+                            arguments = arguments[:index]
+                            break
+                if "CXX" in arguments:
+                    facts.add("cpp")
+        except (OSError, UnicodeError):
+            pass
     if exists("pom.xml") or exists("build.gradle") or exists("build.gradle.kts"):
         facts.add("java")
     if list(root.glob("*.sln")) or list(root.glob("*.slnx")) or list(root.glob("*.csproj")) or exists("Directory.Build.props"):
@@ -71,11 +98,21 @@ def detect_project_facts(project_root: Path | None) -> list[str]:
     if package_json.is_file():
         try:
             package = json.loads(package_json.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            package = {}
+        if not isinstance(package, dict):
             package = {}
         if package.get("workspaces"):
             facts.add("monorepo")
-        dependencies = {**package.get("dependencies", {}), **package.get("devDependencies", {})}
+        dependencies = {}
+        for key in ("dependencies", "devDependencies"):
+            values = package.get(key, {})
+            if isinstance(values, dict):
+                dependencies.update(values)
+        if "typescript" in dependencies:
+            facts.add("typescript")
+        if "vue" in dependencies or "nuxt" in dependencies:
+            facts.update(("vue", "frontend"))
         if "react" in dependencies:
             facts.add("react")
             facts.add("frontend")
@@ -108,6 +145,7 @@ def resolve_skills(
     *,
     events: Iterable[str] = (),
     project_root: Path | None = None,
+    files: Iterable[str] = (),
 ) -> dict:
     raw_tokens = tokenize(text)
     normalized_tokens = normalize_tokens(raw_tokens, routing)
@@ -116,11 +154,19 @@ def resolve_skills(
     reasons: dict[str, list[str]] = defaultdict(list)
     matched_keywords: list[str] = []
     event_list = list(dict.fromkeys(events))
-    facts = detect_project_facts(project_root)
+    target_files = list(dict.fromkeys(str(path).replace("\\", "/") for path in files))
+    # Explicit targets scope language/framework loading; do not preload every
+    # technology installed in an unrelated package or monorepo root.
+    facts = detect_project_facts(project_root) if not target_files else []
     fact_set = set(facts)
 
     for skill_name, definition in routing.get("skills", {}).items():
         triggers = definition.get("triggers", {})
+        for pattern in triggers.get("file_patterns", []):
+            for target in target_files:
+                if fnmatch.fnmatchcase(target, pattern):
+                    selected.add(skill_name)
+                    _add_reason(reasons, skill_name, f"file:{target}")
         for keyword in triggers.get("keywords", []):
             if keyword in normalized_set:
                 selected.add(skill_name)
@@ -194,6 +240,7 @@ def resolve_skills(
         "keywords": matched_keywords,
         "events": event_list,
         "project_facts": facts,
+        "target_files": target_files,
         "skills": ordered,
         "files": [skills[name]["path"] for name in ordered],
         "reasons": {name: reasons[name] for name in ordered},
@@ -270,6 +317,9 @@ def validate_routing(routing: dict, repository_root: Path = REPOSITORY_ROOT) -> 
         if not definition.get("compatibility"):
             errors.append(f"{skill_name} has no compatibility hosts")
         triggers = definition.get("triggers", {})
+        patterns = triggers.get("file_patterns", [])
+        if not isinstance(patterns, list) or any(not isinstance(pattern, str) or not pattern for pattern in patterns):
+            errors.append(f"{skill_name} file_patterns must be a list of non-empty strings")
         for event in triggers.get("events", []):
             if event not in known_events:
                 errors.append(f"{skill_name} references unknown event: {event}")
@@ -362,10 +412,10 @@ def run_regression(routing: dict) -> tuple[int, int]:
                 for relative in project_files:
                     target = project_root / relative
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_text("{}\n" if target.name == "package.json" else "\n", encoding="utf-8")
-                result = resolve_skills(case["query"], routing, events=case.get("events", []), project_root=project_root)
+                    target.write_text(case.get("project_contents", {}).get(relative, "{}\n" if target.name == "package.json" else "\n"), encoding="utf-8")
+                result = resolve_skills(case["query"], routing, events=case.get("events", []), project_root=project_root, files=case.get("files", []))
         else:
-            result = resolve_skills(case["query"], routing, events=case.get("events", []))
+            result = resolve_skills(case["query"], routing, events=case.get("events", []), files=case.get("files", []))
         actual = result["files"]
         expected = case["expected"]
         if actual != expected:
@@ -381,6 +431,7 @@ def main() -> int:
     parser.add_argument("text", nargs="*", help="Task text or keywords")
     parser.add_argument("--event", action="append", default=[], help="Runtime event; may be repeated")
     parser.add_argument("--project-root", type=Path, help="Project root used for manifest-based routing")
+    parser.add_argument("--file", action="append", default=[], help="Target file path (repeatable); scopes manifest loading without reading source")
     parser.add_argument("--json", action="store_true", help="Output structured JSON")
     parser.add_argument("--explain", action="store_true", help="Show why each skill matched")
     parser.add_argument("--self-test", action="store_true", help="Run routing regression cases")
@@ -402,11 +453,11 @@ def main() -> int:
         print(f"\n{total - failures}/{total} routing cases passed")
         return int(bool(failures))
 
-    if not args.text and not args.event and args.project_root is None:
-        parser.error("provide task text, --event, --project-root, --self-test, or --check")
+    if not args.text and not args.event and not args.file and args.project_root is None:
+        parser.error("provide task text, --file, --event, --project-root, --self-test, or --check")
 
     query = " ".join(args.text)
-    result = resolve_skills(query, routing, events=args.event, project_root=args.project_root)
+    result = resolve_skills(query, routing, events=args.event, project_root=args.project_root, files=args.file)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0 if result["files"] else 1

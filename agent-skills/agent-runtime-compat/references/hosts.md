@@ -12,6 +12,7 @@
 - Use `AGENTS.md` for repository instructions and native `<skill>/SKILL.md` bundles for progressive disclosure.
 - Respect the active collaboration mode, sandbox, approvals, tools, and developer-level delegation policy.
 - A tool being available does not imply authorization to use it for side effects.
+- When user/project delegation is explicit and permitted, prefer bounded independent subagents; detect the current spawn, wait/result, and close capabilities rather than assuming every Codex surface exposes them. See [subagent-workflow](../../subagent-workflow/SKILL.md) for minimal inputs, write ownership, and sequential fallback. Do not substitute user-owned chats for internal workers.
 
 ## Cursor
 

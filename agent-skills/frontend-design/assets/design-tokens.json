@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "prefix": "fd",
+  "description": "Original opt-in web design seed; map to existing project tokens before adopting.",
+  "common": {
+    "font-body": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "font-mono": "ui-monospace, SFMono-Regular, Consolas, monospace",
+    "text-small": "0.875rem",
+    "text-body": "1rem",
+    "text-title": "clamp(1.75rem, 1.25rem + 2vw, 3rem)",
+    "line-height-body": "1.5",
+    "line-height-heading": "1.15",
+    "measure-prose": "65ch",
+    "space-1": "0.25rem",
+    "space-2": "0.5rem",
+    "space-3": "0.75rem",
+    "space-4": "1rem",
+    "space-6": "1.5rem",
+    "space-8": "2rem",
+    "space-12": "3rem",
+    "radius-control": "0.5rem",
+    "radius-card": "0.75rem",
+    "control-target": "2.75rem",
+    "focus-width": "2px",
+    "focus-offset": "3px",
+    "duration-fast": "120ms",
+    "duration-normal": "180ms",
+    "motion-distance": "4px",
+    "easing-standard": "cubic-bezier(0.2, 0, 0, 1)"
+  },
+  "themes": {
+    "light": {
+      "color-scheme": "light",
+      "color-bg": "#f8fafc",
+      "color-surface": "#ffffff",
+      "color-surface-raised": "#f0f3f7",
+      "color-text": "#17202c",
+      "color-muted": "#526071",
+      "color-border": "#64748b",
+      "color-accent": "#1258b0",
+      "color-accent-hover": "#0d448d",
+      "color-on-accent": "#ffffff",
+      "color-focus": "#0b63ce",
+      "color-success": "#166534",
+      "color-success-bg": "#eaf7ee",
+      "color-warning": "#854d0e",
+      "color-warning-bg": "#fff8e5",
+      "color-danger": "#b42318",
+      "color-danger-bg": "#fff0ee",
+      "color-info": "#174ea6",
+      "color-info-bg": "#edf4ff",
+      "shadow-overlay": "0 0.5rem 1.5rem rgb(15 23 42 / 0.14)"
+    },
+    "dark": {
+      "color-scheme": "dark",
+      "color-bg": "#10141b",
+      "color-surface": "#18202b",
+      "color-surface-raised": "#202b3a",
+      "color-text": "#f1f5f9",
+      "color-muted": "#b4c0d0",
+      "color-border": "#7d8da3",
+      "color-accent": "#a6c8ff",
+      "color-accent-hover": "#c3dbff",
+      "color-on-accent": "#101828",
+      "color-focus": "#b9d7ff",
+      "color-success": "#9de6b1",
+      "color-success-bg": "#122c1c",
+      "color-warning": "#f4d28a",
+      "color-warning-bg": "#332812",
+      "color-danger": "#ffb4ab",
+      "color-danger-bg": "#3d1a1a",
+      "color-info": "#a6c8ff",
+      "color-info-bg": "#132b4e",
+      "shadow-overlay": "0 0.5rem 1.5rem rgb(0 0 0 / 0.32)"
+    }
+  },
+  "preferences": {
+    "more-contrast": {
+      "light": {
+        "color-text": "#111827",
+        "color-muted": "#334155",
+        "color-border": "#334155",
+        "color-focus": "#003b80"
+      },
+      "dark": {
+        "color-text": "#ffffff",
+        "color-muted": "#dde6f1",
+        "color-border": "#bac8da",
+        "color-focus": "#ffffff"
+      }
+    },
+    "reduced-motion": {
+      "duration-fast": "0ms",
+      "duration-normal": "0ms",
+      "motion-distance": "0px"
+    },
+    "forced-colors": {
+      "color-scheme": "light dark",
+      "color-bg": "Canvas",
+      "color-surface": "Canvas",
+      "color-surface-raised": "Canvas",
+      "color-text": "CanvasText",
+      "color-muted": "CanvasText",
+      "color-border": "CanvasText",
+      "color-accent": "LinkText",
+      "color-accent-hover": "LinkText",
+      "color-on-accent": "Canvas",
+      "color-focus": "Highlight",
+      "color-success": "CanvasText",
+      "color-success-bg": "Canvas",
+      "color-warning": "CanvasText",
+      "color-warning-bg": "Canvas",
+      "color-danger": "CanvasText",
+      "color-danger-bg": "Canvas",
+      "color-info": "CanvasText",
+      "color-info-bg": "Canvas",
+      "shadow-overlay": "none"
+    }
+  }
+}

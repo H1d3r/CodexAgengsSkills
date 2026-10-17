@@ -20,12 +20,12 @@ description: Build or review frontend framework components, state, routing, acce
 - 页面/组件边界清晰：一个组件只承载单一职责。
 - 网络请求与状态读取统一封装（Hooks/Store/服务层），避免散落。
 - 输入表单增加校验、错误边界与空状态处理。
-- 关键交互要有可观测日志（事件名、请求 id、耗时）。
+- 关键交互按现有监控方案验证错误与耗时；无实际需要不新增日志，不记录输入内容、Token 或个人数据。
 - 静态资源与依赖版本按项目 lockfile 管理。
 
 ## 常见实践
 
-- React：合理使用 `useMemo` / `useCallback`，避免过早优化。
+- React：先定位渲染或请求瓶颈；仅在项目编译器与测量证据需要时使用 `useMemo` / `useCallback`，避免过早优化。
 - Vue：组合式 API 的响应式依赖明确，watch 监听有清晰退出条件。
 - Svelte/Angular：组件生命周期与外部副作用有明确清理。
 - 路由与权限保持集中配置，不在页面散落判断。
@@ -40,7 +40,7 @@ description: Build or review frontend framework components, state, routing, acce
 ## 反模式（避免）
 
 - 在 UI 中拼接鉴权和业务规则，导致重复难测。
-- 表单直接操作 DOM 而不是受控状态。
+- 绕过框架或既有表单库的数据流直接修改 DOM；受控与非受控模式依项目表单策略选择。
 - 全局状态作为“万能盒子”，缺乏数据流边界。
 - 忽略 key、列表 diff 与渲染性能问题。
 - 大量 `any` 绕过类型，导致接口变更无人感知。
@@ -54,3 +54,8 @@ description: Build or review frontend framework components, state, routing, acce
 
 - 产品已启用 i18n 时，新增用户文案进入既有翻译资源，不在组件内硬编码多套语言。
 - API 语言头沿用项目统一客户端；不要由单个页面自行拼接。
+
+## 按需专项
+
+- Vue 任务由路由加载 `frontend-vue`；不要仅因前端项目安装了依赖就读取所有框架规则。
+- 明确涉及视觉层级、布局、样式或 UI/UX 时触发 `ui-design` / `ui-review` 并加载 `frontend-design`；仅修复业务逻辑、类型或构建不改变视觉设计。

@@ -11,15 +11,15 @@ description: Apply project-aware JavaScript and TypeScript conventions for appli
 
 ## 核心原则
 
-1. **类型先行**：优先 TypeScript；若是 JavaScript，新增类型注释与边界测试。
+1. **项目语言优先**：保留既有 JS/TS 选择；纯 JavaScript 按需用 JSDoc 与边界测试，不默认迁移 TypeScript。
 2. **最小修改**：避免大面积重构，优先修复问题处。
 3. **可运行优先**：保证 lint + test + build 能在仓库指定方式通过。
 
 ## 强制执行清单
 
-- 所有公共导出函数/组件 props 具备明确类型。
+- 公共导出/组件 props 保持明确且稳定的契约；JS 可用 JSDoc，TS 内部实现允许可靠推断。
 - 异步逻辑显式处理失败分支，避免无意义的 `catch` 空处理。
-- 对外请求统一封装错误上下文：请求参数、状态码、耗时、trace id。
+- 对外请求保留必要错误上下文（状态码、耗时、trace id）；参数按项目策略脱敏，不记录密钥或完整敏感请求。
 - 依赖版本和构建脚本以项目 lockfile 为准（`package-lock.json`/`pnpm-lock.yaml`/`yarn.lock`）。
 
 ## 推荐实践
@@ -29,6 +29,8 @@ description: Apply project-aware JavaScript and TypeScript conventions for appli
 - API 层：统一封装，避免重复拼接 URL、重复错误解析。
 
 ## 常用质量门禁
+
+优先所属 package 的已有脚本与本地版本；以下仅在项目已采用对应工具/模式时使用，不下载依赖或全仓机械执行。
 
 - `prettier --check .`
 - `eslint .` / `eslint . --max-warnings=0`
@@ -41,6 +43,11 @@ description: Apply project-aware JavaScript and TypeScript conventions for appli
 - `any` 大面积泛滥，导致边界类型失效。
 - `new Promise` 包装原有 Promise，导致异常链丢失。
 - 忽略 bundle/编译警告直接提交。
+
+## Skill 协作
+
+- 本入口处理 JS/TS 共有的异步、运行时和工具链约定；TS strict、类型收窄、声明与迁移任务使用独立 `typescript` skill，不在此重复细则。
+- 创建文件时加载 `project-structure`；不因 package.json 自动加载特定前端框架。
 
 ## 与仓库冲突时的优先级
 

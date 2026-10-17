@@ -44,12 +44,21 @@
 - `quality-gates`：Select proportionate validation gates and report commands, results, impact, and remaining risk.
 - `coding-standards`：Apply cross-language readability, naming, error handling, typing, and minimal-change standards.
 
+- `cpp`：Implement and review C++ code using project-selected standards, RAII ownership, lifetime safety, and focused compiler, CMake, and test checks.
+- `typescript`：Implement and review TypeScript code with project-version-aware configuration, gradual strictness, safe narrowing, and runtime validation at data boundaries.
+- `frontend-vue`：Build or review Vue UI components, reactivity, accessibility, performance, and tests using the project's installed Vue version and TypeScript conventions.
+- `frontend-design`：Design or refine user-facing web layouts, visual hierarchy, responsive styling, themes, and accessible interactions when explicitly requested; not for pure TypeScript logic or routine nonvisual fixes.
+- `subagent-workflow`：Delegate bounded independent work to supported subagents when the user or project explicitly requests delegation or lower main-thread context; avoid generic agent or task mentions.
+
 ## 使用
 
 ```bash
 python3 -B agent-skills/skill-router.py "python api testing"
 python3 -B agent-skills/skill-router.py --event file-create "add a helper" --explain
 python3 -B agent-skills/skill-router.py --project-root . --json "review implementation"
+python3 -B agent-skills/skill-router.py --file src/App.vue --explain "fix component"
+python3 -B agent-skills/skill-router.py --event ui-design --explain "design dashboard"
+python3 -B agent-skills/skill-router.py --event task-dispatch --explain "implement independent modules"
 ```
 
 ## 新增或修改 Skill

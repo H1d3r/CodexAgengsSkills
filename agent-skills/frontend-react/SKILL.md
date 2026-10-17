@@ -32,6 +32,12 @@ description: Build or review React and TypeScript UI behavior, state, accessibil
 - 发生路由变更时同步更新菜单/面包屑/鉴权。
 - 主题与文案支持本地化（i18n）
 
+## 性能优先级（按实际证据采用）
+
+- 先排查无依赖请求的串行 waterfall 和关键 bundle，再处理局部重渲染；有依赖/鉴权顺序的请求不能盲目并发。
+- 复用项目已有路由/框架的数据加载与缓存机制；不因性能建议强制安装 query 框架或把普通 React 项目改造成 Next.js。
+- 官方依据（访问日期 2026-09-30）：[Vercel React Best Practices](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/SKILL.md)、[React Effect 数据抓取限制](https://react.dev/reference/react/useEffect#fetching-data-with-effects)。仅借鉴已适用原则，不复制框架专属规则。
+
 ## 常用质量门禁
 
 - `lint` / `typecheck` / `build`

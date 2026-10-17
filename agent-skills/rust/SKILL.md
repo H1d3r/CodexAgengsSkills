@@ -17,6 +17,15 @@ description: Apply project-aware Rust conventions for services, CLIs, libraries,
 3. **错误语义分层**：业务错误、参数错误、外部错误分开表达。
 4. **无回归测试不合入**：新行为至少补充一个可复现测试。
 
+## 编译与发布隐私（强制）
+
+- 配置发布构建、CI、容器、原生 SDK 打包或排查路径泄露时，读取 [references/build-privacy.md](references/build-privacy.md) 及其中的共用门禁，扩展实际构建入口；普通业务代码修改不默认触发。
+- 公开可执行文件、静态库和动态库使用锁定依赖和明确的 release profile，并使用稳定版 `--remap-path-prefix=FROM=TO`。至少映射项目、主目录、Cargo 缓存、工具链、target 和临时构建目录，兼顾词法及解析后路径；宽泛映射在前、具体映射在后，覆盖依赖编译。
+- 审计 encoded、普通环境、target 环境及 Cargo 配置中实际生效的 flags；保留参数边界，合并必要 linker、SONAME、页面对齐、平台参数、features 和架构。构建器清理环境时在其受控环境注入，不修改全局 Cargo 配置，不默认引入 nightly / `-Z`。
+- release 默认 `debug = 0`；SDK 优先 `strip = "debuginfo"` 以保留必要链接符号，不为隐私改变 panic 策略。`--release` 或 strip 不能代替路径映射，也不能追溯修改预编译标准库或原生依赖。
+- 禁止通过 `env!` / `option_env!`、`build.rs`、生成代码或资源，将真实构建路径、账号、主机名及凭证作为任意字符串嵌入发布产物；检查 `file!()`、panic 位置、`OUT_DIR` 和原生链接产物。
+- qualification、打包或分发前扫描实际产物（含缓存及预编译依赖）；失败返回非零状态，不授予合格资格，也不输出敏感匹配值。SDK 验证真实链接、动态加载和必要导出；Mach-O 仅在已确认 unsigned / ad-hoc 状态下修改，正式签名及未知状态停止修改，旧产物资格不自动继承。
+
 ## 编码原则
 
 - 避免生产路径使用 `unwrap` / `expect`（仅测试/明确不可能时）。

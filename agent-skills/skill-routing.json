@@ -25,7 +25,19 @@
       "py": "python",
       "ci": "devops",
       "cd": "devops",
-      "ops": "devops"
+      "ops": "devops",
+      "c++": "cpp",
+      "cxx": "cpp",
+      "vue3": "vue",
+      "vue.js": "vue",
+      "c++98": "cpp",
+      "c++03": "cpp",
+      "c++11": "cpp",
+      "c++14": "cpp",
+      "c++17": "cpp",
+      "c++20": "cpp",
+      "c++23": "cpp",
+      "c++26": "cpp"
     }
   },
   "events": [
@@ -33,7 +45,10 @@
     "directory-create",
     "artifact-generate",
     "project-scaffold",
-    "repository-audit"
+    "repository-audit",
+    "task-dispatch",
+    "ui-design",
+    "ui-review"
   ],
   "skills": {
     "python": {
@@ -48,6 +63,10 @@
         "events": [],
         "project_facts": [
           "python"
+        ],
+        "file_patterns": [
+          "*.py",
+          "*.pyi"
         ]
       },
       "requires": [],
@@ -167,6 +186,9 @@
         "events": [],
         "project_facts": [
           "go"
+        ],
+        "file_patterns": [
+          "*.go"
         ]
       },
       "requires": [],
@@ -250,6 +272,9 @@
         "events": [],
         "project_facts": [
           "rust"
+        ],
+        "file_patterns": [
+          "*.rs"
         ]
       },
       "requires": [],
@@ -268,16 +293,15 @@
       "triggers": {
         "keywords": [
           "rust-pro",
-          "ownership",
-          "lifetimes",
-          "lifetime",
           "borrow-checker"
         ],
         "phrases": [
           "rust performance",
           "rust ownership",
           "rust unsafe",
-          "rust ffi"
+          "rust ffi",
+          "rust lifetime",
+          "rust lifetimes"
         ],
         "events": [],
         "project_facts": []
@@ -334,6 +358,9 @@
         "events": [],
         "project_facts": [
           "dotnet"
+        ],
+        "file_patterns": [
+          "*.cs"
         ]
       },
       "requires": [],
@@ -420,6 +447,12 @@
         "events": [],
         "project_facts": [
           "javascript-typescript"
+        ],
+        "file_patterns": [
+          "*.js",
+          "*.jsx",
+          "*.mjs",
+          "*.cjs"
         ]
       },
       "requires": [],
@@ -466,6 +499,9 @@
         "events": [],
         "project_facts": [
           "java"
+        ],
+        "file_patterns": [
+          "*.java"
         ]
       },
       "requires": [],
@@ -683,6 +719,9 @@
         "events": [],
         "project_facts": [
           "sql"
+        ],
+        "file_patterns": [
+          "*.sql"
         ]
       },
       "requires": [],
@@ -867,6 +906,190 @@
         "pi",
         "generic"
       ]
+    },
+    "cpp": {
+      "path": "agent-skills/cpp/SKILL.md",
+      "level": "P1",
+      "priority": 450,
+      "triggers": {
+        "keywords": [
+          "cpp"
+        ],
+        "phrases": [
+          "c++ core guidelines",
+          "现代 C++"
+        ],
+        "events": [],
+        "project_facts": [
+          "cpp"
+        ],
+        "file_patterns": [
+          "*.cpp",
+          "*.cc",
+          "*.cxx",
+          "*.hpp",
+          "*.hxx",
+          "*.hh",
+          "*.cppm",
+          "*.ixx"
+        ]
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "typescript": {
+      "path": "agent-skills/typescript/SKILL.md",
+      "level": "P1",
+      "priority": 510,
+      "triggers": {
+        "keywords": [
+          "typescript"
+        ],
+        "phrases": [],
+        "events": [],
+        "project_facts": [
+          "typescript"
+        ],
+        "file_patterns": [
+          "*.ts",
+          "*.tsx",
+          "*.mts",
+          "*.cts",
+          "tsconfig.json",
+          "*/tsconfig.json",
+          "tsconfig.*.json",
+          "*/tsconfig.*.json"
+        ]
+      },
+      "requires": [
+        "javascript-typescript"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "frontend-vue": {
+      "path": "agent-skills/frontend-vue/SKILL.md",
+      "level": "P1",
+      "priority": 610,
+      "triggers": {
+        "keywords": [
+          "vue",
+          "nuxt",
+          "frontend-vue"
+        ],
+        "phrases": [
+          "vue 3",
+          "vue 2",
+          "Vue 组件"
+        ],
+        "events": [],
+        "project_facts": [
+          "vue"
+        ],
+        "file_patterns": [
+          "*.vue"
+        ]
+      },
+      "requires": [
+        "frontend-framework"
+      ],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "frontend-design": {
+      "path": "agent-skills/frontend-design/SKILL.md",
+      "level": "P2",
+      "priority": 1010,
+      "triggers": {
+        "keywords": [
+          "frontend-design",
+          "uiux"
+        ],
+        "phrases": [
+          "design system",
+          "design tokens",
+          "visual design",
+          "ui design",
+          "ux design",
+          "web design",
+          "landing page",
+          "现代前端",
+          "前端样式",
+          "视觉设计",
+          "设计系统",
+          "设计令牌",
+          "落地页",
+          "界面设计",
+          "界面样式",
+          "用户体验设计",
+          "ui/ux"
+        ],
+        "events": [
+          "ui-design",
+          "ui-review"
+        ],
+        "project_facts": [],
+        "file_patterns": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
+    },
+    "subagent-workflow": {
+      "path": "agent-skills/subagent-workflow/SKILL.md",
+      "level": "P3",
+      "priority": 2005,
+      "triggers": {
+        "keywords": [
+          "subagent-workflow",
+          "subagent",
+          "subagents"
+        ],
+        "phrases": [
+          "sub agent",
+          "sub agents",
+          "parallel agents",
+          "delegate tasks",
+          "task delegation",
+          "子代理",
+          "子任务分发",
+          "并行代理"
+        ],
+        "events": [
+          "task-dispatch"
+        ],
+        "project_facts": [],
+        "file_patterns": []
+      },
+      "requires": [],
+      "conflicts": [],
+      "compatibility": [
+        "codex",
+        "cursor",
+        "pi",
+        "generic"
+      ]
     }
   },
   "combinations": [
@@ -880,6 +1103,36 @@
         "python-testing-patterns"
       ],
       "note": "Python testing tasks include language-specific testing guidance before generic testing guidance."
+    },
+    {
+      "when_keywords": [
+        "rust",
+        "ownership"
+      ],
+      "includes": [
+        "rust-pro"
+      ],
+      "note": "Require Rust context for shared ownership and lifetime terminology."
+    },
+    {
+      "when_keywords": [
+        "rust",
+        "lifetime"
+      ],
+      "includes": [
+        "rust-pro"
+      ],
+      "note": "Require Rust context for shared ownership and lifetime terminology."
+    },
+    {
+      "when_keywords": [
+        "rust",
+        "lifetimes"
+      ],
+      "includes": [
+        "rust-pro"
+      ],
+      "note": "Require Rust context for shared ownership and lifetime terminology."
     }
   ],
   "minimal_collections": {
@@ -938,6 +1191,23 @@
     ],
     "gpt-6-astra": [
       "agent-runtime-compat"
+    ],
+    "cpp": [
+      "cpp"
+    ],
+    "typescript": [
+      "javascript-typescript",
+      "typescript"
+    ],
+    "vue": [
+      "frontend-vue",
+      "frontend-framework"
+    ],
+    "ui design": [
+      "frontend-design"
+    ],
+    "task dispatch": [
+      "subagent-workflow"
     ]
   }
 }
